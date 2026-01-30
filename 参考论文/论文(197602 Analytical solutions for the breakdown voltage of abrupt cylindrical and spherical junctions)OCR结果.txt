@@ -1,0 +1,177 @@
+\documentclass[a4paper,10pt,twocolumn]{article}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{siunitx}
+
+\title{Analytical Solutions for the Breakdown Voltage of Abrupt Cylindrical and Spherical Junctions}
+\author{B. Jayant Baliga \\ General Electric Corporate Research and Development Center \\ Schenectady, NY 12301, U.S.A. \and Sorab K. Ghandhi \\ Electrical and Systems Engineering Department \\ Rensselaer Polytechnic Institute, Troy, NY 12181, U.S.A.}
+\date{Received 11 December 1975; in revised form 28 February 1976}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+[cite_start]Analytical solutions for the breakdown voltage of abrupt cylindrical and spherical junctions have been obtained, using suitable approximations for the electric field in the depletion layer[cite: 10]. [cite_start]These solutions are shown to be within $\pm1\%$ of exact computer solutions for doping densities of less than $10^{16}$ cm$^{-3}$[cite: 11]. [cite_start]By normalization to the parallel plane case, these solutions have been presented in a form which allows the computation of the breakdown voltage of both cylindrical and spherical junctions using a single curve for each situation[cite: 12].
+\end{abstract}
+
+\section{Introduction}
+[cite_start]Modern integrated circuit technology is based on the feasibility of making a large number of separate $p-n$ junctions on a single substrate[cite: 14]. [cite_start]Such junctions are conventionally fabricated by diffusion of impurities, through a photolithographically delineated window in an impervious masking layer, to form a "planar" junction in the substrate material[cite: 15]. [cite_start]For a rectangular window, such a junction consists of a plane structure terminated with cylindrical curved boundaries at the window edge[cite: 16]. [cite_start]In addition, if the window has sharp corners, the junction contains a spherical boundary at these locations[cite: 17]. [cite_start]It has been shown that the breakdown voltage of a planar junction is limited by avalanche multiplication at these curved junction boundaries, rather than in the parallel plane portion of the junction[cite: 18].
+
+[cite_start]Analyses of both cylindrical and spherical abrupt junctions, using computerized solutions of the ionization integral, have resulted in a set of design curves relating the breakdown voltage to the radius of curvature and the doping concentration in the substrate[cite: 19]. [cite_start]These theoretical results have been experimentally verified[cite: 20]. [cite_start]Computations have also been extended to the case of diffused junctions by taking into account the voltage supported in the diffused portion of the junction[cite: 20].
+
+[cite_start]Solution for the breakdown voltage requires the calculation of the ionization integral for a two-dimensional situation[cite: 21]. [cite_start]The general approach is to solve this integral along various paths followed by avalanching hole-electron pairs[cite: 22]. [cite_start]The path of maximum multiplication is usually the electrical field line which passes through the point of maximum electric field[cite: 23]. [cite_start]Solution along this path gives the breakdown voltage[cite: 24].
+
+[cite_start]This paper provides analytical solutions for the breakdown voltage of both cylindrical and spherical abrupt planar junctions by the use of suitable approximations for the field distribution in these junctions[cite: 25]. [cite_start]Although based on the simple one-dimensional approach of integration along a radius vector, the solutions are reasonably close to computer derived values for all practical purposes[cite: 26, 28]. [cite_start]This approach allows the condensation of the multiplicity of curves provided in the literature into a single curve, and can be used for the calculation of the breakdown voltage of planar junctions with any given radius of curvature and background doping density[cite: 29].
+
+\section{Parallel Plane Junction}
+This section considers the breakdown of parallel plane junctions. [cite_start]Quantities derived here will be used subsequently to provide normalized solutions to the breakdown voltage of the curved junctions[cite: 31]. [cite_start]In the parallel plane case, Poisson's equation using the depletion layer approximation can be written as[cite: 32]:
+\begin{equation}
+\frac{d^{2}V}{dx^{2}}=-\frac{dE}{dx}=-\frac{qN_{B}}{\epsilon\epsilon_{0}}
+\end{equation}
+[cite_start]where $V$ is the applied voltage, $E$ is the electric field, $q$ is the electronic charge, $N_{B}$ is the background doping $(N_{D}-N_{A})$, $\epsilon$ is the relative permittivity, and $\epsilon_{0}$ is the dielectric constant of free space[cite: 35]. [cite_start]Solving for the electric field and voltage distribution at breakdown[cite: 36]:
+\begin{equation}
+E=\frac{qN_{B}}{\epsilon\epsilon_{0}}(x-W_{c})
+\end{equation}
+\begin{equation}
+V=\frac{qN_{B}}{2\epsilon\epsilon_{0}}(2W_{c}x-x^{2})
+\end{equation}
+[cite_start]where $W_{c}$ is the depletion layer width at breakdown for the parallel plane junction[cite: 40].
+
+[cite_start]Sze and Gibbons have used separate values for the ionization coefficients of electrons and holes[cite: 41]. [cite_start]These computations can be greatly simplified by using the concept of an average ionization coefficient[cite: 42]. [cite_start]Using this concept, the breakdown voltage can be obtained by solving the ionization integral[cite: 45]:
+\begin{equation}
+\int_{0}^{W_{c}}\alpha~dx=1.
+\end{equation}
+[cite_start]In this paper a simple approximation to the dependence of the average ionization coefficient upon electric field for silicon, given by Fulop, is used[cite: 48]:
+\begin{equation}
+\alpha=AE^{7} \text{ cm}^{-1}
+\end{equation}
+[cite_start]where $A=1.8\times10^{-35}$[cite: 60, 61].
+
+[cite_start]Combining with equations (2) and (4), the depletion layer width at breakdown for the parallel plane case is obtained as[cite: 62]:
+\begin{equation}
+W_{c}=\left(\frac{8}{A}\right)^{1/8}\left(\frac{\epsilon\epsilon_{0}}{qN_{B}}\right)^{7/8}
+\end{equation}
+[cite_start]and the corresponding peak electric field as[cite: 72]:
+\begin{equation}
+E_{pPP}=\left(\frac{8}{A}\cdot\frac{qN_{B}}{\epsilon\epsilon_{0}}\right)^{1/8}=\left(\frac{8}{AW_{c}}\right)^{1/7}.
+\end{equation}
+[cite_start]After making the necessary numerical substitutions for silicon[cite: 74]:
+\begin{equation}
+E_{pPP}=4010{N_{B}}^{1/8} \text{ V/cm.}
+\end{equation}
+[cite_start]This result is in excellent agreement (within $\pm1\%$) with the values derived by Sze and Gibbons, for doping densities under $1\times10^{16}\text{cm}^{-3}$[cite: 76]. [cite_start]Further, substitution of numerical values for silicon into (7) and (3) gives[cite: 77]:
+\begin{equation}
+W_{c}=2.67\times10^{10}{N_{B}}^{-7/8}
+\end{equation}
+[cite_start]and the breakdown voltage as[cite: 79]:
+\begin{equation}
+BV_{PP}=6.40\times10^{13}{N_{B}}^{-3/4}
+\end{equation}
+[cite_start]which are also in excellent agreement with [cite: 1] [cite_start][cite: 82]. [cite_start]From this we conclude that Fulop's formula for the ionization coefficient can be successfully used to calculate breakdown voltages for doping levels below $1\times10^{16}\text{cm}^{-3}$[cite: 82].
+
+\section{Cylindrical Junction}
+[cite_start]Poisson's equation for the voltage distribution in the depletion layer of a cylindrical junction can be written as[cite: 94]:
+\begin{equation}
+\frac{1}{r}\frac{d}{dr}\left(r\frac{d~V}{dr}\right)=-\frac{1}{r}\frac{d}{dr}(rE)=-\left(\frac{qN_{B}}{\epsilon\epsilon_{0}}\right)
+\end{equation}
+[cite_start]Solving for the electric field and voltage distributions gives[cite: 96]:
+\begin{equation}
+E=\frac{qN_{B}}{2\epsilon\epsilon_{0}}\left(\frac{r^{2}-{r_{d}}^{2}}{r}\right)
+\end{equation}
+and
+\begin{equation}
+V=\frac{qN_{B}}{2\epsilon\epsilon_{0}}\left[\left(\frac{r_{j}^{2}-r^{2}}{2}\right)+{r_{d}}^{2}\ln\left(\frac{r}{r_{j}}\right)\right]
+\end{equation}
+[cite_start]where $r_{j}$ is the radius of curvature of the metallurgical junction and $r_{d}$ is the radius of curvature of the depletion layer boundary[cite: 54].
+
+[cite_start]The seventh power law dependence of the ionization coefficient upon electric field results in most of the ionization being confined to the high field regions of the junction depletion layer[cite: 56]. [cite_start]Examination of (13) shows that, for cylindrical junctions, this region is largely confined to small values of $r$ near the boundary of the metallurgical junction[cite: 57]. [cite_start]This allows an approximation to (13)[cite: 58]:
+\begin{equation}
+E=\frac{K}{r}
+\end{equation}
+[cite_start]for substitution in the ionization integral[cite: 66]. [cite_start]This hyperbolic approximation for the electric field results in the "depletion layer" extending to infinity[cite: 66]. [cite_start]Thus the ionization integral must be performed from the metallurgical junction boundary, $r_{j}$, to infinity[cite: 67]. [cite_start]Carrying out this integration, the peak electric field at breakdown is obtained as[cite: 68]:
+\begin{equation}
+E_{pC}=\left(\frac{6}{Ar_{j}}\right)^{1/7}
+\end{equation}
+[cite_start]Normalizing to the parallel plane case[cite: 85]:
+\begin{equation}
+\frac{E_{pC}}{E_{pPP}}=\left(\frac{3W_{c}}{4r_{j}}\right)^{1/7} \approx \left(\frac{W_{c}}{r_{j}}\right)^{1/7}.
+\end{equation}
+
+Using the above relationship between the peak electric field in the cylindrical and parallel plane cases, it is possible to normalize the breakdown voltage of an abrupt cylindrical junction to the corresponding parallel plane junction. [cite_start]Using (3) and (14), this ratio can be derived[cite: 100, 101]:
+\begin{align}
+\frac{BV_{C}}{BV_{pp}} &= \frac{2}{W_{c}E_{pPP}}\left[\frac{E_{pC}r_{j}}{2}\right. \nonumber \\
+&+ \left.\frac{1}{2}\left(\frac{qN_{B}}{2\epsilon\epsilon_{0}}r_{j}^{2}-E_{pC}r_{j}\right)\cdot \ln\left(1-\frac{2\epsilon_{0}E_{pC}}{qN_{B}r_{j}}\right)\right]
+\end{align}
+[cite_start]which reduces to[cite: 103]:
+\begin{align}
+\frac{BV_{C}}{BV_{PP}} &= \left\{\frac{1}{2}\left[\left(\frac{r_{j}}{W_{c}}\right)^{2} + 2\left(\frac{r_{j}}{W_{c}}\right)^{6/7}\right] \right. \nonumber \\
+&\cdot \left. \ln\left[1+2\left(\frac{W_{c}}{r_{j}}\right)^{8/7}\right]-\left(\frac{r_{j}}{W_{c}}\right)^{6/7}\right\}
+\end{align}
+with the application of (17). [cite_start]This formulation for the breakdown voltage of cylindrical junctions is plotted in Fig. 2[cite: 135]. [cite_start]The agreement between the analytical solution and the computer-derived solution is extremely good for values of $(r_{j}/W_{c})$ below 0.9[cite: 136].
+
+\section{Spherical Junctions}
+[cite_start]In the case of spherical junctions, Poisson's equation for the depletion layer can be written as[cite: 138, 142]:
+\begin{equation}
+\frac{1}{r^{2}}\frac{d}{dr}\left(r^{2}\frac{d~V}{dr}\right)=-\frac{1}{r^{2}}\frac{d}{dr}(r^{2}E)=-\left(\frac{qN_{B}}{\epsilon\epsilon_{0}}\right).
+\end{equation}
+[cite_start]Solving for the electric field and voltage distribution gives[cite: 144]:
+\begin{equation}
+E=\frac{qN_{B}}{3\epsilon\epsilon_{0}}\left(\frac{{r^{3}-{r_{d}}^{3}}{r^{2}}\right)
+\end{equation}
+[cite_start]and [cite: 486]
+\begin{equation}
+V=\frac{qN_{B}}{3\epsilon\epsilon_{0}}\left[\left(\frac{r_{j}^{2}-r^{2}}{2}\right)+{r_{d}}^{3}\left(\frac{1}{r_{j}}-\frac{1}{r}\right)\right].
+\end{equation}
+[cite_start]As in the case of cylindrical junctions, the ionization is largely confined to small values of $r$ near the metallurgical junction and the approximation[cite: 487]:
+\begin{equation}
+E=\frac{K}{r^{2}}
+\end{equation}
+[cite_start]can be used instead in the ionization integral[cite: 490]. [cite_start]Performing the integration from $r_j$ to infinity as before gives the peak electric field at breakdown for spherical junctions[cite: 490]:
+\begin{equation}
+E_{pS}=\left(\frac{13}{Ar_{j}}\right)^{1/7}
+\end{equation}
+[cite_start]Normalizing to the corresponding parallel plane case gives[cite: 493]:
+\begin{equation}
+\frac{E_{pS}}{E_{pPP}}=\left(\frac{13}{8}\frac{W_{c}}{r_{j}}\right)^{1/7}.
+\end{equation}
+
+[cite_start]Proceeding to the breakdown voltage of spherical junctions, a normalization to the parallel plane case gives[cite: 497, 498]:
+\begin{equation}
+\frac{BV_{S}}{BV_{PP}}=\frac{2}{W_{c}E_{pPP}}\left[\frac{qN_{B}}{2\epsilon\epsilon_{0}}r_{j}^{2}-E_{pS}r_{j}-\frac{qN_{B}}{2\epsilon\epsilon_{0}}\left(r_{j}^{3}-\frac{3\epsilon\epsilon_{0}r_{j}^{2}E_{pS}}{qN_{B}}\right)^{2/3}\right]
+\end{equation}
+[cite_start]which, with the application of (25), reduces to[cite: 499, 500]:
+\begin{align}
+\frac{BV_{S}}{BV_{pp}} &= \left\{\left(\frac{r_{j}}{W_{c}}\right)^{2}+2.14\left(\frac{r_{j}}{W_{c}}\right)^{6/7} \right. \nonumber \\
+&- \left.\left[\left(\frac{r_{j}}{W_{c}}\right)^{3} +3\left(\frac{r_{j}}{W_{c}}\right)^{13/7}\right]^{2/3}\right\}
+\end{align}
+[cite_start]This formulation for the breakdown voltage of spherical junctions is compared to the solutions obtained from Sze and Gibbons in Fig. 3[cite: 518]. [cite_start]Agreement is once again extremely good over the range $(r_{j}/W_{c})$ from 0 to 1[cite: 518].
+
+\section{Discussion and Conclusions}
+[cite_start]It was shown in the earlier sections that the breakdown voltage of both cylindrical junctions and spherical junctions can be condensed into a single curve applicable to each case[cite: 520]. [cite_start]This compact presentation replaces the multiplicity of curves that have been used in the past[cite: 521]. [cite_start]However, to obtain the breakdown voltage of the curved junction, a calculation of the breakdown voltage $(BV_{PP})$ of the corresponding parallel plane case (same background doping) as well as the depletion layer width at breakdown $(W_{c})$ of the parallel plane case, must still be performed[cite: 522].
+
+[cite_start]Figures 4 and 5 have been provided to facilitate these calculations, and comprise all the information necessary for determining the breakdown voltage of cylindrical and spherical junctions for silicon with background doping of less than $1\times10^{16}\text{cm}^{-3}$[cite: 544]. [cite_start]Although Fig. 5 can only be used for the calculation of the breakdown voltages of junctions with a radius of curvature less than the depletion layer width at breakdown in the corresponding parallel plane case, most practical junctions used for the fabrication of devices fall into this category[cite: 544]. [cite_start]This is, therefore, not a serious limitation to the solutions presented here[cite: 545].
+
+\section*{Acknowledgements}
+[cite_start]This work was partly supported by Grant No. ENG75-01490 from the National Science Foundation[cite: 546]. [cite_start]The authors would like to thank R. C. Rafun for assistance in manuscript preparation[cite: 547].
+
+\begin{thebibliography}{99}
+\bibitem{1} S. M. Sze and G. Gibbons, Solid-St. Electron. [cite_start]9, 831 (1966). [cite: 549]
+\bibitem{2} O. Leistiko and A. S. Grove, Solid-St. Electron. [cite_start]9, 847 (1966). [cite: 549]
+\bibitem{3} D. V. Speeney and G. P. Carey, Solid-St. Electron. [cite_start]10, 177 (1967). [cite: 550]
+\bibitem{4} P. R. Wilson, Proc. [cite_start]IEEE 55, 1483 (1967). [cite: 551]
+\bibitem{5} R. M. Warner, Solid-St. Electron. [cite_start]15, 1303 (1972). [cite: 552]
+\bibitem{6} D. A. Vincent, H. Rombeck, R. E. Thomas, R. M. Sirsi and A. R. Boothroyd, Solid-St Electron. [cite_start]14, 1193 (1971). [cite: 553]
+\bibitem{7} P. R. Wilson, Solid-St. Electron. [cite_start]16, 991 (1973). [cite: 554]
+\bibitem{8} D. P. Kennedy and R. R. O'Brien, IBM J. Res. and Dev. [cite_start]10, 213 (1966). [cite: 555]
+\bibitem{9} C. Bulucea et al., Solid-St. Electron. [cite_start]17, 881 (1974). [cite: 556]
+[cite_start]\bibitem{10} V. A. K. Temple et al., IEEE-ED 22, 910 (1975). [cite: 557]
+\bibitem{11} S. M. Sze, Physics of Semiconductor Devices, Chap. 2. [cite_start]Wiley-Interscience, New York (1969). [cite: 557]
+\bibitem{12} C. A. Lee, R. A. Logan, R. L. Batdorf, J. J. Kleimack and W. Wiegmann, Phys. [cite_start]Rev. 134, A761 (1964). [cite: 559]
+\bibitem{13} W. Fulop, Solid-St. Electron. [cite_start]10, 39 (1967). [cite: 560]
+\end{thebibliography}
+
+\end{document}

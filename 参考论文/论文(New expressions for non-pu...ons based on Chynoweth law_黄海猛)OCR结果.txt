@@ -1,0 +1,93 @@
+Title: New expressions for non-punch-through and punch-through abrupt parallel-plane junctions based on Chynoweth law
+Journal: Journal of Semiconductors, Vol. 34, No. 7, July 2013
+DOI: 10.1088/1674-4926/34/7/074003
+
+Authors: Huang Haimeng (黄海猛) and Chen Xingbi (陈星弼)
+Affiliation: State Key Laboratory of Electronic Thin Films and Integrated Devices, University of Electronic Science and Technology of China, Chengdu 610054, China
+
+Abstract: 
+The relations among the breakdown voltage, the width and the concentration of the voltage-sustaining layer for the non-punch-through (NPT) and punch-through (PT) abrupt parallel-plane junctions have been re-established based on the ionization integral by the Chynoweth model, distinguished from the conventional results obtained by the Fulop model. The numerical calculation results indicate that the new expressions are more accurate than those in previous literature. While the breakdown voltage of the NPT case varied from 400 to 1600 V using the Chynoweth model, the value using the Fulop model is overestimated by 12% (478 V) to 18% (1895 V). For the PT case with optimum design of the specific on-resistance, when the breakdown voltage is varied from 400 to 1600 V, the width and concentration are from 81.0168% to 80.2416% and from 91.4341% to 91.6941% of those of the NPT cases, respectively. The relations between the specific on-resistance and the breakdown voltage for both the NPT and PT structures are also established. Simulation results by MEDICI show good agreement with the proposed expressions.
+
+Key words: abrupt parallel-plane junction; impact ionization integral; Chynoweth law; Fulop law
+
+1. Introduction
+The tradeoff between the specific on-resistance (R_on) and breakdown voltage (BV) of the power devices has drawn much attention[1-9]. Most of the relationships between R_on and BV are calculated in closed form thanks to the Fulop formula, i.e., the power law approximations of the impact ionization coefficients[10], while it is known that Chynoweth's law[11], which is customarily used for device simulations by MEDICI, is more accurate to depict the real devices. Thus, the conventional design rules by the Fulop model for the non-punch-through (NPT) or punch-through (PT) abrupt parallel-plane junction, which is the main voltage-sustaining region of some power devices, will get larger error compared to the numerical results in MEDICI simulations. Nonetheless, hardly any literature has focused on this problem.
+
+The purpose of this paper is to propose new design expressions for the parameters in the NPT and PT abrupt parallel-plane junctions by Chynoweth's law. Firstly, a simplification of the ionization integral for both the NPT and PT structures is derived. Furthermore, the relationship between the breakdown voltage BV_PP of the NPT structure and its voltage-sustaining layer parameters, i.e., doping concentration N_pp and depth W_pp, is numerically calculated. The case to design the PT structure for the optimum R_on,pt is also presented. Finally, the relations between R_on and BV for these two cases are proposed.
+
+2. Simplification of the ionization integral with Chynoweth's law
+The breakdown behavior of a p-n junction can be governed by:
+I_n = ∫ α_{n,ii} exp[-∫^w (α_{n,ii} - α_{p,ii}) dv] dw = 1    (1)
+
+where u and w are distances along the electric field line, and by Chynoweth's law, the impact ionization rates of electron and hole α_{n,ii} = a_n exp(-b_n/E) with a_n = 7.03×10^5 cm^-1 and b_n = 1.231×10^6 V/cm, and α_{p,ii} = a_p exp(-b_p/E) with a_p = 1.582×10^6 cm^-1 and b_p = 2.036×10^6 V/cm[12], respectively, where E is the electric field along the electric field line.
+
+For either the NPT or PT structure, it is obvious that the direction of the electric field line is the same as x direction, and thus E can be degenerated into a linear function E(x) = k_0 x + E(0). Accordingly, the integral of α_{p,ii} in Eq. (1) can be expressed as the exponential integral function Ei(x) (here Ei(x) = ∫_{-∞}^x (e^t/t) dt for x < 0), and F(x) = ∫_0^x (α_{n,ii} - α_{p,ii}) dv yields:
+
+F(x) = x[a_n exp(-b_n / (k_0 x + E(0))) - a_p exp(-b_p / (k_0 x + E(0)))] 
+       + (a_n / k_0) [b_n Ei(-b_n / (k_0 x + E(0))) + E(0) exp(-b_n / (k_0 x + E(0)))]
+       - (a_p / k_0) [b_p Ei(-b_p / (k_0 x + E(0))) + E(0) exp(-b_p / (k_0 x + E(0)))] - A    (2)
+
+where A = (a_n / k_0)[b_n Ei(-b_n / E_0) + E(0) exp(-b_n / E_0)] - (a_p / k_0)[b_p Ei(-b_p / E_0) + E(0) exp(-b_p / E_0)].
+The ionization integral in Eq. (1) can now be simplified as I_n = ∫_0^W α_{n,ii} exp[-F(x)] dx = 1.
+
+It is noted that there are three unknown parameters in the design of the NPT or PT structure, i.e., BV, W and N. For a required breakdown voltage, although the relation of the concentration versus the width is hardly to be found in closed form as that by using the Fulop model, it can be numerically solved by MATLAB, in which the ionization integral is calculated by the trapezoid numerical method similar as that in Ref. [13].
+
+3. Relation of the breakdown voltage, width and doping concentration for the NPT structure
+For the NPT structure in Fig. 1(a), the electric field located at x = W_pp is zero; then, the electric field can be calculated as E(x) = q N_pp (W_pp - x) / ε_s = 2 BV_pp (W_pp - x) / W_pp^2, where q and ε_s have their common meanings and BV_pp = q N_pp W_pp^2 / 2 ε_s is used. Thus, only two independent parameters are to be determined when solving the simplified integral equation. By using the simplified method proposed above, the relations among the doping concentration N_pp, the width W_pp and the given breakdown voltage BV_pp can be numerically calculated, which can be numerically fitted by:
+
+N_pp ≈ 1.202 × 10^18 BV_pp^-1.292 cm^-3    (3)
+W_pp ≈ 0.03319 BV_pp^1.146 μm             (4)
+W_pp ≈ 4.322 × 10^14 N_pp^-0.8927 μm      (5)
+
+Then the critical electric field E_c,pp = q N_pp W_pp / ε_s can be determined as:
+E_c,pp ≈ 5311 N_pp^0.1139 V/cm            (6)
+
+Figure 2 shows the comparison of the numerical and fitted results by MATLAB using the Chynoweth model, the analytical results using the Fulop model, and the simulation results from MEDICI. It is seen that, for the same breakdown voltage BV_pp, the concentration N_pp, which is N_pp ≈ 2.01 × 10^18 BV_pp^-4/3 cm^-3 [9, 18] is larger than that estimated in Eq. (3), and the width W_pp from the Fulop model, which is W_pp ≈ 0.0257 BV_pp^7/6 μm [9, 18], is smaller than that in Eq. (4). That is to say, the breakdown voltage calculated from the Fulop model is larger than that from the Chynoweth model provided that the same concentration is given. For BV_pp varied from 400 to 1600 V by the Chynoweth model, the value is overestimated by 12% (478 V) to 18% (1895 V) by the Fulop model. This is due to the fact that the impact ionization rate determined by the Fulop model is smaller [16], which leads to a higher critical electric field determined by E_c,pp ≈ 4010 N_pp^1/8 V/cm [18] shown in Fig. 3 and a bigger breakdown voltage for the same doping.
+
+In the MEDICI simulation, for simplicity, the impact ionization integral is calculated by ignoring the effect of the ionization-generated carriers, and the number of carriers in the simulation is zero. In the calculation of the R_on, the carrier mobility model of ANALYTIC with its default setting is used. The simulation results of the breakdown voltage BV_pp and the critical electric field E_c,pp show that the numerical results as well as their approximation expressions are in excellent agreement. The specific on-resistance of the NPT case is calculated by R_on,pp = W_pp / q μ_n N_pp, where the concentration-dependent mobility μ_n is modeled by the Caughey-Thomas formulation [14, 15]:
+
+μ_n = 55.24 + 1373.99 / (1 + (N / 1.072 × 10^17)^0.73)    (7)
+
+Then, the specific on-resistance R_on,pp for a given breakdown voltage BV_pp can be numerically fitted as:
+R_on,pp ≈ 9.6161 × 10^-6 BV_pp^2.473 mΩ·cm^2    (8)
+
+The relation R_on,pp ≈ 5.93 × 10^-6 BV_pp^2.5 mΩ·cm^2 by the Fulop model in Ref. [16] is smaller than that estimated in Eq. (8), which is shown in Fig. 4(a). For BV_pp varied from 400 to 1600 V, the R_on,pp estimated in Eq. (8) is varied from 25.93 to 802.09 mΩ·cm^2, whereas the value by the Fulop model is underestimated by 26.8% (18.98 mΩ·cm^2) to 24.3% (607.23 mΩ·cm^2). The simulation results from MEDICI are also shown in this figure. A simulated 400-V trench NPT VDMOSFET is shown in Fig. 4(b). The gate oxide thickness and p-channel doping are 40 nm and 1×10^17 cm^-3, respectively. For a required breakdown voltage, the doping and width of the drift region are given by Eqs. (3) and (4), respectively. The simulated threshold voltage (V_th) is about 2 V, and the applied gate-to-source (V_GS) and drain-to-source (V_DS) voltages are 15 V and 1 V, respectively. The simulation results show good agreement with the results from Eq. (8). The slight deviation of the breakdown voltages is mainly because Eqs. (3) and (4) are derived from the ideal abrupt NPT junctions, which are different from the simulated trench NPT VDMOSFETs in Fig. 4(b).
+
+4. Relation of the breakdown voltage, width and doping concentration for the optimized PT structure
+For the PT case, the electric field can be written as E(x) = -q N_pt x / ε_s + (q N_pt W_pt / 2 ε_s + BV_pt / W_pt) and three independent parameters are to be determined in the solution of the integral equation. For a given breakdown voltage BV_pt, the relation of the concentration N_pt versus the width W_pt, which is shown in Fig. 5, can be calculated by using the above same method. Specifically, the NPT case, which is the edge of the PT case, is also shown in this figure. For a given BV_pt, one group of W_pt and N_pt in Fig. 5 will lead to the minimum R_on,pt, which can also be calculated by the Caughey-Thomas model. Then, the relation of N_pt and W_pt for the optimized PT structure to minimize R_on,pt with different BV_pt can be numerically fitted as:
+
+W_pt ≈ 2.875 × 10^-2 BV_pt^1.136 μm        (9)
+N_pt ≈ 1.444 × 10^18 BV_pt^-1.333 cm^-3    (10)
+W_pt ≈ 2.309 × 10^14 N_pt^-0.8826 μm       (11)
+
+In Fig. 5, the circles are for the NPT structure, whereas the dots are for the cases of the presented optimum R_on,pt design for the PT structure, where both N_pt and W_pt are smaller than those of NPT cases. The stars are the results in Ref. [9]. Figure 6 shows the relations of the concentration N_pt and the width W_pt versus BV_pt when the breakdown voltage is varied from 400 to 1600 V. In Ref. [9], these relations are W_pt ≈ 2.086 × 10^-2 BV_pt^7/6 μm, N_pt ≈ 1.873 × 10^18 BV_pt^-4/3 cm^-3 and W_pt ≈ 2 × 10^14 N_pt^-7/8 μm which are also compared in Fig. 6. The optimal concentration obtained in Ref. [9] by the Fulop model is larger, and the optimal width is smaller than those by the Chynoweth model, respectively, which will make for a large error in calculation of R_on,pt.
+
+When the breakdown voltage is varied from 400 to 1600 V, the widths and concentrations for the optimum PT cases are from 81.0168% to 80.2416% and from 91.4341% to 91.6941% of those of the NPT cases, respectively, which are more accurate than the results with fixed values of 81.2% for the widths and 93.2% for the concentrations by using the Fulop model in Ref. [9].
+
+The specific on-resistance of the optimized PT structure versus breakdown voltage can be obtained and numerically fitted by:
+R_on,pt ≈ 9.863 × 10^-6 BV_pt^2.453 mΩ·cm^2    (12)
+
+The numerical results obtained in MATLAB as well as the approximation expression in Eq. (12) are shown in Fig. 7(a). The previous results, which are established as R_on,pt ≈ 5.2 × 10^-6 BV^2.5 mΩ·cm^2 in Ref. [9] and R_on,pt ≈ 8.3 × 10^-6 BV_pt^2.5 mΩ·cm^2 in Ref. [17], respectively, are also compared in this figure. It is seen from the figure that the results in Ref. [9] are smaller, whereas the results in Ref. [17] are bigger compared with the results in Eq. (12). Figure 7(a) also shows the simulation results from MEDICI. The simulated 400-V trench PT VDMOSFET is shown in Fig. 7(b). The other parts except for the drift region, the bias condition and the simulation models are the same as those in NPT cases, and for a required breakdown voltage, the width and doping of the drift region are given by Eqs. (9) and (10), respectively. The simulation results also show good agreement with the results from Eq. (12), verifying the accuracy of the proposed optimization method for the abrupt PT structures.
+
+5. Conclusion
+For device simulations by MEDICI, the integral of impact ionization is calculated according to the Chynoweth model which is more accurate to depict the real devices. The design of the parameters for the NPT and PT abrupt parallel-plane p-n junctions by this model is proposed and compared with the conventional results by the Fulop model. The proposed new expressions both for the NPT and PT cases can be used in the design of the breakdown voltage for different structures more accurately, including the cell or the termination design of some power devices.
+
+References
+[1] Hu C. Optimum doping profile for minimum ohmic resistance and high-breakdown voltage. IEEE Trans Electron Devices, 1979, 26(3): 243
+[2] Sun S C, Plummer J D. Modeling of the on-resistance of LDMOS, VDMOS, and VMOS power transistors. IEEE Trans Electron Devices, 1980, 27(2): 356
+[3] Chen X, Hu C. Optimum doping profile of power MOSFET epitaxial layer. IEEE Trans Electron Devices, 1982, 29(6): 2985
+[4] Darwish M N, Board K. Optimization of breakdown voltage and on-resistance of VDMOS transistors. IEEE Trans Electron Devices, 1984, 31(12): 1769
+[5] Hu C, Chi M, Patel V M. Optimum design of power MOSFET's. IEEE Trans Electron Devices, 1984, 31(12): 1693
+[6] Tarng M L. On-resistance characterization of VDMOS power transistors. Proc IEDM, 1981, (27): 429
+[7] Board K, Byrne D J, Towers M S. The optimization of on-resistance in vertical DMOS power devices with linear and hexagonal surface geometries. IEEE Trans Electron Devices, 1984, 31(1): 75
+[8] Fernandez J, Hidalgo S, Paredes J, et al. An ON-resistance closed form for VDMOS devices. IEEE Electron Device Lett, 1989, 10(5): 212
+[9] He J, Wang X, Chen X. Optimum design of epitaxial layers with uniform doping for VDMOS transistor. Chinese Journal of Semiconductors, 1999, 29(11): 977
+[10] Fulop W. Calculation of avalanche breakdown voltages of silicon p-n junctions. Solid-State Electron, 1967, 10(1): 39
+[11] Chynoweth A G. Ionization rates for electrons and holes in silicon. Phys Rev, 1958, 109(5): 1537
+[12] Van Overstraeten R, de Man H. Measurement of the ionization rates in diffused silicon p-n junctions. Solid-State Electron, 1970, 13(5): 583
+[13] Huang H, Chen X. Optimization of specific on-resistance of balanced symmetric superjunction MOSFETs based on a better approximation of ionization integral. IEEE Trans Electron Devices, 2012, 59(10): 2742
+[14] Caughey D, Thomas R. Carrier mobilities in silicon empirically related to doping and field. Proc IEEE, 1967: 2192
+[15] MEDICI. Two dimensional device simulation program. ed. 2002.2.0, Synopsys Inc., Fremont, CA, 2002
+[16] Baliga B J. Fundamentals of power semiconductor devices. New York: Springer-Verlag, 2008
+[17] Chen X. Theory of a novel voltage-sustaining composite buffer (CB) layer for power devices. Chin J Electron, 1998, 7(3): 211
+[18] Baliga B J, Ghandhi S K. Analytical solutions for the breakdown voltage of abrupt cylindrical and spherical junctions. Solid-State Electron, 1976, 19: 739
