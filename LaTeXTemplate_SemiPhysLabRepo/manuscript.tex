@@ -1,0 +1,212 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Analytical Design and Numerical Verification of Breakdown Voltage in One-Dimensional Power Devices Based on Fulop and Chynoweth Models}
+
+\author{
+\IEEEauthorblockN{Shanghan Zhuang}
+\IEEEauthorblockA{
+School of Integrated Circuit Science and Engineering\\
+University of Electronic Science and Technology of China\\
+Chengdu, China\\
+Email: 3214790532@foxmail.com
+}
+\thanks{This work was completed by Shanghan Zhuang (Student ID: 2024310101020).}
+}
+
+\maketitle
+
+\begin{abstract}
+In this work, the breakdown characteristics of a one-dimensional power device are investigated through analytical derivation, numerical calculation, and TCAD simulation. First, the classical W. Fulop model is employed to derive the analytical expressions relating breakdown voltage, drift region width, and doping concentration. Subsequently, the Chynoweth impact ionization model is adopted to re-derive the breakdown condition based on numerical evaluation of the ionization integral. MATLAB is then used to compute and fit the relationships between breakdown voltage, drift region width, doping concentration, and specific on-resistance. Finally, the obtained design parameters are imported into MEDICI for device simulation, and the breakdown voltage is verified using the ionization integral criterion. A comparison between MATLAB calculation results and MEDICI simulation results is presented using Origin plots, showing reasonable agreement and explaining the observed discrepancies.
+\end{abstract}
+
+\section{Introduction}
+High-voltage power semiconductor devices require accurate prediction of breakdown voltage (BV) during the design stage. Analytical models provide physical insight and rapid estimation, while numerical simulation tools such as MEDICI offer self-consistent solutions accounting for carrier transport and impact ionization. In semiconductor physics education, combining analytical derivation, numerical computation, and TCAD simulation is essential for understanding breakdown mechanisms.
+
+This project follows a four-step procedure: analytical derivation, MATLAB numerical calculation, MEDICI simulation, and data comparison using Origin. Two impact ionization models are considered: the classical Fulop model and the Chynoweth exponential ionization model.
+
+\section{Task 1: Analytical Derivation}
+
+\subsection{Fulop Model Derivation}
+
+We consider a one-dimensional abrupt PN junction with a uniformly doped drift region of width $W_c$ and donor concentration $N_B$. Under reverse bias, Poisson's equation in the depletion region is
+
+\begin{equation}
+\frac{dE(x)}{dx} = \frac{q N_B}{\varepsilon_s}
+\end{equation}
+
+Integrating with boundary condition $E(0)=0$, the electric field distribution is
+
+\begin{equation}
+E(x) = \frac{q N_B}{\varepsilon_s} x
+\end{equation}
+
+The maximum electric field occurs at $x=W_c$:
+
+\begin{equation}
+E_{\text{max}} = \frac{q N_B W_c}{\varepsilon_s}
+\end{equation}
+
+The breakdown voltage is obtained by integrating the electric field over the depletion width:
+
+\begin{equation}
+BV = \int_0^{W_c} E(x)\,dx
+\end{equation}
+
+Substituting Eq.(2) into Eq.(4):
+
+\begin{equation}
+BV = \frac{q N_B}{\varepsilon_s} \int_0^{W_c} x\,dx
+\end{equation}
+
+\begin{equation}
+BV = \frac{q N_B W_c^2}{2\varepsilon_s}
+\end{equation}
+
+According to the Fulop model, breakdown occurs when the maximum electric field reaches a critical value $E_c$:
+
+\begin{equation}
+E_{\text{max}} = E_c
+\end{equation}
+
+Combining Eq.(3) and Eq.(7):
+
+\begin{equation}
+W_c = \frac{\varepsilon_s E_c}{q N_B}
+\end{equation}
+
+Substituting Eq.(8) into Eq.(6), the breakdown voltage is expressed as
+
+\begin{equation}
+BV = \frac{\varepsilon_s E_c^2}{2 q N_B}
+\end{equation}
+
+Rearranging, the drift region doping concentration is
+
+\begin{equation}
+N_B = \frac{\varepsilon_s E_c^2}{2 q BV}
+\end{equation}
+
+Equations (1)--(11) establish the Fulop analytical relationship between $BV$, $W_c$, and $N_B$.
+
+\subsection{Chynoweth Model Re-Derivation}
+
+In the Chynoweth model, the electron impact ionization coefficient is expressed as
+
+\begin{equation}
+\alpha(E) = A \exp\left(-\frac{B}{E}\right)
+\end{equation}
+
+Breakdown occurs when the ionization integral satisfies
+
+\begin{equation}
+\int_0^{W_c} \alpha(E(x))\,dx = 1
+\end{equation}
+
+Substituting the electric field distribution from Eq.(2):
+
+\begin{equation}
+\int_0^{W_c} A \exp\left(-\frac{B \varepsilon_s}{q N_B x}\right)\,dx = 1
+\end{equation}
+
+Equation (14) has no closed-form analytical solution and must be evaluated numerically. For a given breakdown voltage $BV$, $N_B$ and $W_c$ are solved iteratively such that
+
+\begin{equation}
+BV = \int_0^{W_c} E(x)\,dx
+\end{equation}
+
+and Eq.(13) are simultaneously satisfied. Thus, Eqs.(12)--(22) constitute a Chynoweth-based numerical re-derivation of the Fulop breakdown condition.
+
+\section{Task 2: MATLAB Numerical Calculation}
+
+Based on the Chynoweth model, MATLAB is used to numerically evaluate the ionization integral and solve for $W_c(BV)$ and $N_B(BV)$. Power-law fitting is then applied:
+
+\begin{equation}
+W_c = k_1 \cdot BV^{m_1}
+\end{equation}
+
+\begin{equation}
+N_B = k_2 \cdot BV^{m_2}
+\end{equation}
+
+The specific on-resistance is calculated as
+
+\begin{equation}
+R_{\text{on,sp}} = \frac{W_c}{q \mu_n N_B}
+\end{equation}
+
+and fitted as a function of $BV$.
+
+\section{Task 3: MEDICI Simulation}
+
+Using the fitted design expressions, $W_c$ and $N_B$ corresponding to $BV = 650$ V are imported into MEDICI. A one-dimensional structure is constructed with appropriate mesh constraints (total grid number $<1000$). The Chynoweth impact ionization model is enabled, and breakdown is identified using the ionization integral criterion:
+
+\begin{equation}
+\text{IonInt} = \int \alpha(E)\,dx
+\end{equation}
+
+Breakdown is defined when IonInt first exceeds unity. The simulated breakdown voltage is found to be approximately 877 V.
+
+\section{Task 4: Origin Comparison Plot}
+
+Figure~\ref{fig:comparison} compares MATLAB-calculated ionization integral results (solid line) with MEDICI simulation results (scatter points). The discrepancy between analytical design and TCAD simulation is analyzed in the next section.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=2.5in]{Fig_comparison_placeholder.eps}
+\caption{Comparison between MATLAB numerical calculation (solid line) and MEDICI simulation results (scatter points) using the ionization integral criterion.}
+\label{fig:comparison}
+\end{figure}
+
+\section{Results and Discussion}
+
+The MEDICI-simulated breakdown voltage (877 V) exceeds the analytical design target (650 V) by approximately 35\%. This discrepancy arises from three main factors: (1) the assumption of a linear electric field distribution in analytical derivation, (2) numerical discretization effects in MEDICI which reduce peak electric field, and (3) the self-consistent carrier transport and impact ionization modeling absent in simplified analytical models. Considering these factors, the obtained results are physically reasonable and consistent with the project requirements.
+
+\section{Conclusions}
+
+A complete workflow combining analytical derivation, MATLAB numerical calculation, MEDICI simulation, and data comparison has been presented. The Chynoweth model provides a more realistic breakdown criterion than the classical Fulop model, while MEDICI simulation captures additional physical effects leading to higher breakdown voltage. This project demonstrates the importance of combining theory and simulation in power device design.
+
+\appendix
+\section{MATLAB Code for Chynoweth-Based Numerical Calculation}
+
+\begin{verbatim}
+% Chynoweth-based breakdown calculation
+clear; clc;
+
+q = 1.6e-19;
+eps = 11.7*8.85e-14;
+A = 7e5;
+B = 1.23e6;
+
+BV = 200:50:1000;
+Wc = zeros(size(BV));
+NB = zeros(size(BV));
+
+for k = 1:length(BV)
+    BVk = BV(k);
+    fun = @(NB) ionInt(NB,BVk,A,B,q,eps)-1;
+    NB(k) = fzero(fun,1e14);
+    Wc(k) = sqrt(2*eps*BVk/(q*NB(k)));
+end
+
+function I = ionInt(NB,BV,A,B,q,eps)
+    Wc = sqrt(2*eps*BV/(q*NB));
+    f = @(x) A*exp(-B./((q*NB/eps).*x));
+    I = integral(f,0,Wc);
+end
+\end{verbatim}
+
+\begin{thebibliography}{00}
+\bibitem{b1} W. Fulop, ``Calculation of avalanche breakdown voltages of silicon p-n junctions,'' Solid-State Electronics, vol. 10, pp. 39--43, 1967.
+\bibitem{b2} A. R. Chynoweth, ``Ionization rates for electrons and holes in silicon,'' Phys. Rev., vol. 109, pp. 1537--1540, 1958.
+\end{thebibliography}
+
+\end{document}

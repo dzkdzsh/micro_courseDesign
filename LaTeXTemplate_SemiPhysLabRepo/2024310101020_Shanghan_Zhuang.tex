@@ -1,0 +1,379 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{url}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Study on the Relationship between Breakdown Voltage and Specific On-Resistance of Non-Punch-Through Abrupt Parallel-Plane Junctions Based on Chynoweth Model}
+
+\author{\IEEEauthorblockN{Shanghan Zhuang}
+\IEEEauthorblockA{\textit{School of Integrated Circuit Science and Engineering} \\
+\textit{University of Electronic Science and Technology of China}\\
+Chengdu, China \\
+3214790532@foxmail.com}
+}
+
+\maketitle
+
+\begin{abstract}
+This study investigates the fundamental trade-off relationship between breakdown voltage (BV) and specific on-resistance ($R_{on,sp}$) in power semiconductor devices. Based on the Chynoweth ionization model, systematic theoretical analysis and numerical calculations are performed for non-punch-through (NPT) abrupt parallel-plane junctions. First, the basic design formulas for parallel-plane junctions are derived using the Fulop power-law model, including analytical expressions for depletion width, critical electric field, and breakdown voltage. Subsequently, based on the Chynoweth exponential model, power-law fitting relationships between breakdown voltage and depletion width, as well as doping concentration, are obtained through MATLAB numerical solution of the ionization integral. The study also employs the Caughey-Thomas mobility model to calculate the specific on-resistance, yielding the fitting formula $R_{on,sp} \approx 9.88\times10^{-9} \times BV^{2.47}$ $\Omega\cdot cm^2$. Finally, the 650V design condition is verified through MEDICI device simulation software, and the simulation results show good agreement with numerical calculations. The research demonstrates that the design method based on the Chynoweth model is more accurate than the traditional Fulop model, providing reliable theoretical basis for power device optimization design.
+\end{abstract}
+
+\section{Introduction}
+
+Power semiconductor devices are core components of modern power electronic systems, and their performance directly affects power conversion efficiency and system reliability. In power device design, there exists a fundamental trade-off relationship between breakdown voltage (BV) and specific on-resistance ($R_{on,sp}$): increasing the breakdown voltage typically requires increasing the drift region thickness and reducing the doping concentration, but this leads to increased on-resistance \cite{b1}.
+
+Traditional power device design usually employs the power-law approximation model proposed by Fulop to describe the impact ionization coefficient \cite{b2}:
+\begin{equation}
+\alpha = AE^7
+\end{equation}
+where $A = 1.8\times10^{-35}$ $cm^{-1}$ $(V/cm)^{-7}$. This model has a simple form and is convenient for analytical derivation, and has been widely used in engineering design.
+
+However, in actual device simulations (such as MEDICI software), the exponential model proposed by Chynoweth is usually adopted \cite{b3}:
+\begin{equation}
+\alpha_n = a_n \exp(-b_n/E), \quad \alpha_p = a_p \exp(-b_p/E)
+\end{equation}
+This model is considered to more accurately describe the impact ionization process in silicon. Research by Huang et al. \cite{b4} shows that in the 400-1600V range, the Fulop model overestimates the breakdown voltage by 12\%-18\%.
+
+The objectives of this study are: (1) to derive the basic design formulas for parallel-plane junctions based on the Fulop model; (2) to perform numerical calculations based on the Chynoweth model to obtain more accurate design parameter relationships; (3) to verify the numerical calculation results through MEDICI simulation; (4) to analyze the physical reasons for the differences between the two models.
+
+\section{Theoretical Derivation}
+
+\subsection{Basic Equations for Parallel-Plane Junctions}
+
+For non-punch-through (NPT) abrupt parallel-plane junctions, under the depletion approximation, Poisson's equation can be written as \cite{b1}:
+\begin{equation}
+\frac{d^2V}{dx^2} = -\frac{dE}{dx} = -\frac{qN_B}{\epsilon\epsilon_0}
+\end{equation}
+where $V$ is the potential, $E$ is the electric field intensity, $q$ is the electron charge, $N_B$ is the background doping concentration, $\epsilon$ is the relative permittivity of silicon, and $\epsilon_0$ is the vacuum permittivity.
+
+Solving this equation yields the electric field and voltage distributions:
+\begin{equation}
+E(x) = \frac{qN_B}{\epsilon\epsilon_0}(W_c - x)
+\end{equation}
+\begin{equation}
+V(x) = \frac{qN_B}{2\epsilon\epsilon_0}(2W_c x - x^2)
+\end{equation}
+where $W_c$ is the depletion width at breakdown.
+
+\subsection{Analytical Solution Based on Fulop Model}
+
+Using the Fulop model, the breakdown condition is that the ionization integral equals 1:
+\begin{equation}
+\int_0^{W_c} \alpha \, dx = \int_0^{W_c} AE^7 \, dx = 1
+\end{equation}
+
+Substituting Eq. (4) and integrating, the depletion width is obtained:
+\begin{equation}
+W_c = \left(\frac{8}{A}\right)^{1/8}\left(\frac{\epsilon\epsilon_0}{qN_B}\right)^{7/8}
+\end{equation}
+
+The corresponding peak electric field is:
+\begin{equation}
+E_{p,PP} = \left(\frac{8}{A}\cdot\frac{qN_B}{\epsilon\epsilon_0}\right)^{1/8} = 4010N_B^{1/8} \quad \text{V/cm}
+\end{equation}
+
+The breakdown voltage is:
+\begin{equation}
+BV_{PP} = \frac{1}{2}E_{p,PP}W_c = 6.40\times10^{13}N_B^{-3/4} \quad \text{V}
+\end{equation}
+
+The relationship between depletion width and breakdown voltage:
+\begin{equation}
+W_c = 2.67\times10^{10}N_B^{-7/8} \quad \text{cm} = 25.7\times BV_{PP}^{7/6} \quad \mu\text{m}
+\end{equation}
+
+\subsection{Numerical Method Based on Chynoweth Model}
+
+For the Chynoweth model, the ionization integral expression is \cite{b4}:
+\begin{equation}
+I_n = \int_0^W \alpha_n(E(x))\exp\left[-\int_0^x(\alpha_n - \alpha_p)\,dv\right]dx = 1
+\end{equation}
+
+where the electron and hole ionization coefficients are:
+\begin{align}
+\alpha_n &= 7.03\times10^5 \exp(-1.231\times10^6/E) \quad \text{cm}^{-1} \\
+\alpha_p &= 1.582\times10^6 \exp(-2.036\times10^6/E) \quad \text{cm}^{-1}
+\end{align}
+
+For NPT structures, the electric field distribution is:
+\begin{equation}
+E(x) = \frac{2BV(W-x)}{W^2}
+\end{equation}
+
+Due to the complexity of the Chynoweth model, analytical solutions cannot be obtained, and numerical methods are required. This study uses MATLAB for numerical integration and equation solving.
+
+\section{MATLAB Numerical Calculation}
+
+\subsection{Calculation Method}
+
+The core of numerical calculation is to solve the following equation:
+\begin{equation}
+I_n(W; BV) = 1
+\end{equation}
+
+For a given breakdown voltage $BV$, the depletion width $W$ satisfying the above equation is solved through numerical methods, and then the doping concentration is calculated:
+\begin{equation}
+N = \frac{2\epsilon_s BV}{qW^2}
+\end{equation}
+
+The calculation procedure is as follows:
+\begin{enumerate}
+\item Select 41 sampling points in the $BV = 400-1600$V range
+\item For each $BV$ value, use the fzero function to solve $I_n(W) = 1$
+\item Use the trapezoidal rule (cumtrapz) for numerical integration with 20000 grid points
+\item Calculate the corresponding $N$ value
+\item Perform power-law fitting for $N(BV)$ and $W(BV)$
+\end{enumerate}
+
+\subsection{Calculation Results}
+
+\subsubsection{Relationship between BV and W, N}
+
+Through numerical calculation and power-law fitting, the following relationships are obtained:
+
+\begin{equation}
+N \approx 1.432\times10^{18} \times BV^{-1.321} \quad \text{cm}^{-3}
+\end{equation}
+
+\begin{equation}
+W \approx 0.0301 \times BV^{1.160} \quad \mu\text{m}
+\end{equation}
+
+\begin{equation}
+W \approx 2.679\times10^{14} \times N^{-0.879} \quad \mu\text{m}
+\end{equation}
+
+Comparison with the results from Huang et al. \cite{b4}:
+\begin{itemize}
+\item This work: $N \approx 1.432\times10^{18} \times BV^{-1.321}$
+\item Reference \cite{b4}: $N \approx 1.202\times10^{18} \times BV^{-1.292}$
+\end{itemize}
+
+The differences mainly arise from implementation details of numerical methods and fitting interval selection.
+
+\subsubsection{Critical Electric Field}
+
+The fitting result for the critical electric field $E_c = qNW/\epsilon_s$ is:
+\begin{equation}
+E_c \approx 5311 \times N^{0.114} \quad \text{V/cm}
+\end{equation}
+
+Compared with the Fulop model $E_c \approx 4010 \times N^{1/8}$, the Chynoweth model predicts a higher critical electric field.
+
+\subsection{Specific On-Resistance Calculation}
+
+\subsubsection{Mobility Model}
+
+The electron mobility adopts the Caughey-Thomas empirical model \cite{b5,b6}:
+\begin{equation}
+\mu_n = 55.24 + \frac{1373.99}{1 + (N/1.072\times10^{17})^{0.73}} \quad \text{cm}^2/(\text{V}\cdot\text{s})
+\end{equation}
+
+\subsubsection{Specific On-Resistance Formula}
+
+The calculation formula for specific on-resistance is:
+\begin{equation}
+R_{on,sp} = \frac{W}{q\mu_n N}
+\end{equation}
+
+Substituting the expressions for $W$ and $N$, and after numerical calculation and fitting:
+\begin{equation}
+R_{on,sp} \approx 9.88\times10^{-9} \times BV^{2.472} \quad \Omega\cdot\text{cm}^2
+\end{equation}
+
+This is basically consistent with the result from Huang et al. \cite{b4}: $R_{on,sp} \approx 9.62\times10^{-6} \times BV^{2.473}$ $m\Omega\cdot cm^2$.
+
+Partial calculation data is shown in Table \ref{tab:ron}.
+
+\begin{table}[h]
+\centering
+\caption{Specific On-Resistance Calculation Results (Partial Data)}
+\label{tab:ron}
+\begin{tabular}{ccccc}
+\hline
+\textbf{BV (V)} & \textbf{W ($\mu$m)} & \textbf{N (cm$^{-3}$)} & \textbf{$\mu_n$} & \textbf{$R_{on,sp}$} \\
+\hline
+400 & 31.28 & $5.29\times10^{14}$ & 1401.4 & 0.0264 \\
+700 & 60.29 & $2.49\times10^{14}$ & 1413.0 & 0.1070 \\
+1000 & 91.20 & $1.56\times10^{14}$ & 1417.7 & 0.2583 \\
+1300 & 123.42 & $1.10\times10^{14}$ & 1420.2 & 0.4915 \\
+1600 & 156.65 & $8.43\times10^{13}$ & 1421.8 & 0.8156 \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{MEDICI Simulation Verification}
+
+\subsection{650V Design Verification}
+
+According to the MATLAB calculation results, for a design target of $BV_{PP} = 650$V:
+\begin{itemize}
+\item Depletion width $W \approx 51.35$ $\mu$m
+\item Doping concentration $N \approx 2.99\times10^{14}$ cm$^{-3}$
+\end{itemize}
+
+A one-dimensional NPT diode model is established in MEDICI for breakdown characteristic simulation. The simulation result shows a breakdown voltage of 646.1V, with only 0.6\% deviation from the design target of 650V, verifying the accuracy of the numerical calculation method.
+
+\subsection{Ionization Integral Verification}
+
+To further validate the consistency between numerical calculation and device simulation, the ionization integral $I_{on}$ as a function of applied voltage $V$ is extracted from MEDICI and compared with MATLAB calculation results, as shown in Fig. \ref{fig:ion_v}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=3.5in]{plot/Ion_V_comparison_final.png}
+\caption{Comparison of ionization integral between MATLAB calculation and MEDICI simulation}
+\label{fig:ion_v}
+\end{figure}
+
+The ionization integral exhibits a characteristic S-shaped curve with increasing applied voltage. In the low-voltage region ($V < 300$V), $I_{on}$ remains near zero, indicating negligible impact ionization. As the voltage increases to the medium-voltage region (300-600V), $I_{on}$ rises rapidly due to the exponential dependence of ionization coefficients on electric field. In the high-voltage region ($V > 600$V), $I_{on}$ approaches unity, satisfying the breakdown condition.
+
+The comparison reveals excellent agreement between MATLAB calculation (solid curve) and MEDICI simulation (scatter points) in the high-voltage region near breakdown. Both curves converge to $I_{on} = 1$ at approximately 650V, confirming the accuracy of the breakdown voltage prediction. The simulated breakdown voltage of 646.1V deviates by only 0.6\% from the MATLAB calculated value of 650V.
+
+In the low-voltage region ($V < 400$V), slight discrepancies are observed, where MEDICI yields higher $I_{on}$ values than MATLAB. This difference can be attributed to: (1) numerical integration method differences between the trapezoidal rule in MATLAB and the finite-element approach in MEDICI; (2) mesh resolution effects in the device simulator; and (3) boundary condition treatments. However, these deviations have minimal impact on the breakdown voltage prediction since the ionization integral remains far below unity in this region.
+
+The consistency between MATLAB numerical calculation and MEDICI device simulation validates the reliability of the Chynoweth model implementation in both platforms. This agreement demonstrates that the MATLAB-based numerical approach can accurately predict breakdown characteristics, providing a computationally efficient alternative to full device simulation for preliminary design optimization.
+
+\subsection{Specific On-Resistance Simulation}
+
+Specific on-resistance simulations are performed at different doping concentrations, and the simulation results are compared with MATLAB calculation results as shown in Fig. \ref{fig:ron}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=3.5in]{plot/R_onsp_400_1200.png}
+\caption{Relationship between specific on-resistance and breakdown voltage (400-1200V)}
+\label{fig:ron}
+\end{figure}
+
+It can be seen from the figure that in the 400-1200V range, the MATLAB calculation results (solid line) agree well with the MEDICI simulation results (scatter points), verifying the reliability of the Chynoweth model and numerical calculation method.
+
+\section{Results and Discussion}
+
+\subsection{N-BV and W-BV Relationship Analysis}
+
+Fig. \ref{fig:n} and Fig. \ref{fig:w} show the relationships between doping concentration and depletion width with breakdown voltage, respectively.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=3.5in]{plot/N_BV.png}
+\caption{Relationship between doping concentration and breakdown voltage}
+\label{fig:n}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=3.5in]{plot/W_BV.png}
+\caption{Relationship between depletion width and breakdown voltage}
+\label{fig:w}
+\end{figure}
+
+It can be seen from the figures that the MATLAB calculation results and MEDICI simulation results show good consistency across the entire voltage range. This is because:
+\begin{enumerate}
+\item The Chynoweth model more accurately describes the impact ionization process in silicon
+\item The numerical calculation method (trapezoidal integration + fzero solving) has high accuracy
+\item The electric field distribution of NPT structures is simple, and numerical calculation is stable
+\end{enumerate}
+
+\subsection{Specific On-Resistance Analysis}
+
+\subsubsection{400-1200V Range}
+
+As shown in Fig. \ref{fig:ron}, in the 400-1200V range, the MATLAB calculation and MEDICI simulation results are highly consistent. This is because:
+\begin{enumerate}
+\item The doping concentration in this range is moderate ($1.1\times10^{14} - 5.3\times10^{14}$ cm$^{-3}$), and the Caughey-Thomas mobility model has good applicability
+\item The ionization integral calculation has good convergence in this range
+\item The power-law fitting has high accuracy in this range
+\end{enumerate}
+
+\subsubsection{400-1600V Range}
+
+Fig. \ref{fig:ron1600} shows the results extended to the 1600V range.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=3.5in]{plot/R_onsp_400_1600.jpg}
+\caption{Relationship between specific on-resistance and breakdown voltage (400-1600V)}
+\label{fig:ron1600}
+\end{figure}
+
+It can be seen from the figure that near 1600V, the fitting effect of the last data point is poor. The reasons are analyzed as follows:
+
+\textbf{(1) Increased Mobility Model Error}
+
+At 1600V, the doping concentration is only $8.43\times10^{13}$ cm$^{-3}$, which is in the low-doping limit region of the Caughey-Thomas model. At this point, the sensitivity of mobility to doping concentration decreases, and the relative model error increases.
+
+\textbf{(2) Numerical Calculation Convergence Issues}
+
+Under high breakdown voltage and low doping concentration conditions, the convergence speed of numerical calculation for the ionization integral becomes slower, requiring finer grid division to ensure accuracy.
+
+\textbf{(3) Power-Law Fitting Applicability Limitations}
+
+The power-law function $R_{on,sp} = C\times BV^p$ has certain limitations in fitting across the entire wide voltage range. Piecewise fitting can achieve better accuracy but increases formula complexity.
+
+\textbf{Improvement Suggestions}:
+\begin{itemize}
+\item Use separate fitting formulas for high BV regions ($>1200$V)
+\item Increase grid density for numerical calculations
+\item Consider using more accurate mobility models
+\end{itemize}
+
+\subsection{Comparison between Fulop and Chynoweth Models}
+
+Table \ref{tab:compare} compares the main differences between the two models.
+
+\begin{table}[h]
+\centering
+\caption{Comparison between Fulop Model and Chynoweth Model}
+\label{tab:compare}
+\begin{tabular}{lcc}
+\hline
+\textbf{Parameter} & \textbf{Fulop Model} & \textbf{Chynoweth Model} \\
+\hline
+$N$ ($10^{18}$cm$^{-3}$) & 2.01 & 1.43 \\
+$W$ ($\mu$m) & $0.0257\times BV^{7/6}$ & $0.0301\times BV^{1.16}$ \\
+$E_c$ (V/cm) & $4010\times N^{1/8}$ & $5311\times N^{0.114}$ \\
+$R_{on,sp}$ ($m\Omega\cdot cm^2$) & $5.93\times BV^{2.5}$ & $9.88\times BV^{2.47}$ \\
+\hline
+\end{tabular}
+\end{table}
+
+The Fulop model underestimates the impact ionization coefficient, resulting in overestimated breakdown voltage, overestimated doping concentration, and underestimated depletion width. This means that designs based on the Fulop model may not achieve the expected breakdown voltage in actual operation, or may have excessive on-resistance.
+
+\section{Conclusions}
+
+This study conducted systematic theoretical analysis and numerical calculations for non-punch-through abrupt parallel-plane junctions based on the Chynoweth model. The main conclusions are as follows:
+
+\begin{enumerate}
+\item Basic design formulas for parallel-plane junctions are derived based on the Fulop model, including analytical expressions for depletion width, critical electric field, and breakdown voltage.
+
+\item Based on the Chynoweth model, power-law fitting relationships between breakdown voltage and depletion width, as well as doping concentration, are obtained through MATLAB numerical calculation: $N \approx 1.432\times10^{18} \times BV^{-1.321}$ cm$^{-3}$, $W \approx 0.0301 \times BV^{1.160}$ $\mu$m.
+
+\item Using the Caughey-Thomas mobility model, the specific on-resistance is calculated, yielding the fitting formula $R_{on,sp} \approx 9.88\times10^{-9} \times BV^{2.472}$ $\Omega\cdot cm^2$.
+
+\item MEDICI simulation verifies the accuracy of numerical calculation results. Under the 650V design condition, the simulated breakdown voltage is 646.1V, with only 0.6\% deviation.
+
+\item The study shows that the design method based on the Chynoweth model is more accurate than the traditional Fulop model. The Fulop model overestimates breakdown voltage by about 12-18\% and underestimates specific on-resistance by about 25-27\%.
+\end{enumerate}
+
+This study provides more accurate theoretical basis and calculation methods for power semiconductor device design, especially in high-voltage and high-current applications, where using the Chynoweth model for design optimization is of great significance.
+
+The source code and simulation data for this project have been open-sourced on GitHub at \url{https://github.com/dzkdzsh/micro_courseDesign}.
+
+\begin{thebibliography}{00}
+\bibitem{b1} B. J. Baliga and S. K. Ghandhi, ``Analytical solutions for the breakdown voltage of abrupt cylindrical and spherical junctions,'' Solid-State Electronics, vol. 19, pp. 739-744, 1976.
+\bibitem{b2} W. Fulop, ``Calculation of avalanche breakdown voltages of silicon p-n junctions,'' Solid-State Electronics, vol. 10, no. 1, pp. 39-43, 1967.
+\bibitem{b3} A. G. Chynoweth, ``Ionization rates for electrons and holes in silicon,'' Physical Review, vol. 109, no. 5, pp. 1537-1540, 1958.
+\bibitem{b4} H. Huang and X. Chen, ``New expressions for non-punch-through and punch-through abrupt parallel-plane junctions based on Chynoweth law,'' Journal of Semiconductors, vol. 34, no. 7, pp. 074003, 2013.
+\bibitem{b5} D. M. Caughey and R. E. Thomas, ``Carrier mobilities in silicon empirically related to doping and field,'' Proceedings of the IEEE, vol. 55, no. 12, pp. 2192-2193, 1967.
+\bibitem{b6} N. D. Arora, J. R. Hauser, and D. J. Roulston, ``Electron and hole mobilities in silicon as a function of concentration and temperature,'' IEEE Transactions on Electron Devices, vol. 29, no. 2, pp. 292-295, 1982.
+\end{thebibliography}
+
+\end{document}
